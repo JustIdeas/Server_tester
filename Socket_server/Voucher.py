@@ -1,5 +1,7 @@
-import socket
-import Server
+# import socket
+import sys
+from Socket_tester import sock
+
 
 class Voucher:
     
@@ -7,9 +9,17 @@ class Voucher:
         self.vnumber = vnumber
         self.ip = ip
     
-    def Test(self):
+    def test(self):
         try:
+
             print("The test has began with voucher number:", self.vnumber, "IP:", self.ip)
-            Server.boleanResult = True
+            result = sock('8.8.8.8', 15).run()
+
+            if result:
+                print("Success Socket!")
+            else:
+                print("Error Socket!")
+
+            return True
         except:
-            print("Something went wrong with:", Exception, BaseException.args())
+            print("Something went wrong with:", sys.exc_info()[0], sys.exc_info()[1])

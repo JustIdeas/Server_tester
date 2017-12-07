@@ -1,9 +1,6 @@
-import socket
-import sys
+# import socket
+# import sys
 import Voucher
-
-
-boleanResult = False
 
 
 class Controller:
@@ -12,8 +9,7 @@ class Controller:
         self.function = function
         self.value = value
 
-
-    def voucher(self):
+    def check(self):
         try:
             print("First",self.function[0])
             self.function[0] = self.function[0].translate(str.maketrans({"(": None}))
@@ -26,10 +22,11 @@ class Controller:
                 self.function[1] = self.function[1].translate(str.maketrans({"'": None}))
                 self.function[2] = self.function[2].translate(str.maketrans({"'": None}))
                 self.function[2] = self.function[2].translate(str.maketrans({")": None}))
-                print ("before", boleanResult)
-                Voucher.Voucher(self.function[1], self.function[2]).Test()
-                print ("after", boleanResult)
+                # print ("before", boleanResult)
+                result = Voucher.Voucher(self.function[1], self.function[2]).test()
+                # print ("after", boleanResult)
 
+                return result
             else:
                print("Não foi", self.function)
         except:
