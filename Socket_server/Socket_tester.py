@@ -34,6 +34,7 @@ class sock:
 
         if control_variable == 0:
             print("OK", control_variable)
-
+            return True
         else:
             print("NOK", control_variable)
+            return False
