@@ -7,6 +7,6 @@ class shell:
         self.command = command
 
     def run(self):
-        print (self.command)
+        print(self.command)
         result = run(self.command, stdout=PIPE, stderr=PIPE, universal_newlines=True, shell=True)
         return str(result.stdout).strip()

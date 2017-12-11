@@ -1,7 +1,6 @@
 import socket
 import sys
 from time import sleep
-from time import time
 
 
 

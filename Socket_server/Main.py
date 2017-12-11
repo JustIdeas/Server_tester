@@ -2,7 +2,7 @@ import socket
 import sys
 import json
 
-from Server import Controller
+from Controller import Controller
 
 BUFFER_SIZE = 512
 
