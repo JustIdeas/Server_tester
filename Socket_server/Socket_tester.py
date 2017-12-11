@@ -1,6 +1,7 @@
 import socket
 import sys
 from time import sleep
+from time import time
 
 
 
@@ -8,13 +9,14 @@ class sock:
 
     def __init__(self, ip, time=0):
         self.ip = ip
-        self.time = time
+        self.time = time*60+30
 
     def run(self):
         i = 0
         control_variable = 0
 
         try:
+            print(self.time)
 
             while i < 2:
                 print('Entrou while')
@@ -38,3 +40,5 @@ class sock:
         else:
             print("NOK", control_variable)
             return False
+
+
