@@ -8,7 +8,7 @@ class sock:
 
     def __init__(self, ip, time=0):
         self.ip = ip
-        self.time = time*60+30
+        self.time = time*60
 
     def run(self):
         i = 0
@@ -25,8 +25,11 @@ class sock:
                 # init.timeout(3)
                 init.shutdown(2)
                 control_variable = control_variable + 1
+                if control_variable == 2:
+                    return False
                 sleep(self.time)
                 i = i + 1
+
 
         except socket.error as e:
             print("Cannot connect to ", self.ip)

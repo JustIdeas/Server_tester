@@ -2,9 +2,9 @@ import socket
 import sys
 import json
 
-from Server import Controller
+from Controller import Controller
 
-BUFFER_SIZE = 512
+BUFFER_SIZE = 1024
 
 
 class Run:
@@ -34,10 +34,15 @@ class Run:
 
                     if not data: break
                     if result:
-                        conn.send('Teste OK'.encode('utf-8'))
+                        print("result 1:", result)
+                        info = ({'result': 1})
+                        conn.send(json.dumps(info).encode('utf-8'))
+
                     else:
                         print("Message Received:", array)
-                        conn.send('Not working'.encode('utf-8'))
+                        info = ({'result': 0})
+                        print("result 0:", result)
+                        conn.send(json.dumps(info).encode('utf-8'))
 
         except:
             print("something went wrong on module Server TCP with:", sys.exc_info()[0], sys.exc_info()[1])
