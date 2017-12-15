@@ -1,7 +1,7 @@
 # import socket
 # import sys
 import Voucher
-
+import CPF
 
 class Controller:
 
@@ -17,6 +17,10 @@ class Controller:
                 result = Voucher.Voucher(self.function["voucher"], self.function["time"], self.function["ssid"]).test()
                 return result
 
+            elif self.function["code"] == 2:
+                print("CPF", self.function)
+                result = CPF.CPF(self.function["cpf"], self.function["time"], self.function["ssid"]).test()
+                return result
             else:
                print("Não foi", self.function)
 
