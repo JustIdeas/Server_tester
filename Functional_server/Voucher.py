@@ -1,6 +1,7 @@
 # import socket
 import sys
 from selenium import webdriver
+import time
 
 from Socket_tester import sock
 from Connect_SSID import connect
@@ -40,19 +41,26 @@ class Voucher:
                 try:
                     urlSucc = browser.find_element_by_xpath("/html/body/div/div/div/div[2]/form/div[@class=\'alert alert-success\']")
                     print("check in success")
+
                     result = sock('8.8.8.8', self.time).run()
+                    if result:
+                        print('slef.time=',self.time)
+                        time.sleep(self.time)
+                        result = sock('8.8.8.8', self.time).run()
+                        if result:
+                            print("Was with access yet")
+                            return False
+                        else:
+                            print("has blocked the access, success!!")
+                            return True
+                    else:
+                        print("Not yet connected")
+                        return False
 
                 except:
                     print("exception urlSucc")
                     return False
 
-                if result:
-                    print("Success Socket!")
-                    return True
-
-                else:
-                    print("Error Socket!")
-                    return False
             else:
                 print("in Voucher, was not able to connect on SSID: ", self.ssid["ssid"], result)
                 return False
