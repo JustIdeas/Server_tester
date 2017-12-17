@@ -1,6 +1,7 @@
 import socket
 import sys
 import json
+import time
 
 from Controller import Controller
 
@@ -48,7 +49,7 @@ class Run:
             print("something went wrong on module Server TCP with:", sys.exc_info()[0], sys.exc_info()[1])
             conn.close()
             tcp_sock.close()
-            Run(5001, '127.0.0.1').main()
+            Run(5002, '127.0.0.1').main()
 
 if __name__ == '__main__':
-    Run(5001, '127.0.0.1').main()
+    Run(5002, '127.0.0.1').main()

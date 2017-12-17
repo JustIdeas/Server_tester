@@ -2,6 +2,7 @@
 # import sys
 import Voucher
 import CPF
+import Cad_ind
 
 class Controller:
 
@@ -20,6 +21,11 @@ class Controller:
             elif self.function["code"] == 2:
                 print("CPF", self.function)
                 result = CPF.CPF(self.function["cpf"], self.function["time"], self.function["ssid"]).test()
+                return result
+
+            elif self.function["code"] == 3:
+                print("Cadastro Individual", self.function)
+                result = Cad_ind.Cad_ind(self.function["cpf"], self.function["time"], self.function["ssid"], self.function["telefone"], self.function["email"], self.function["nome"]).test()
                 return result
             else:
                print("Não foi", self.function)
