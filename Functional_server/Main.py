@@ -1,55 +1,27 @@
-import socket
+import urllib3
 import sys
-import json
-import time
+import argparse
+
 
 from Controller import Controller
 
-BUFFER_SIZE = 1024
+
+urllib3.disable_warnings()
+
+def check_arg(args=None):
+    parser = argparse.ArgumentParser(description='Basic Functions')
+    parser.add_argument('-c', '--case',
+                        help='Test Case',
+                        required='True',
+                        default='cpf')
+    results = parser.parse_args(args)
+    return (results.case)
 
 
-class Run:
-    def __init__(self, port, ip):
-        self.port = port
-        self.ip = ip
+def main():
+    c = check_arg(sys.argv[1:])
+    #print('mode:', m, 'ip:', ip, 'port:', p, 'username:', user, 'password:', pas, 'channel:', ch, ver, int, soc, db, Hid, Iid)
 
-    def main(self):
+    Controller(c).check()
 
-        print("Address port received:", self.port
-              , "Address IP received:", self.ip)
-
-        tcp_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        tcp_sock.bind((self.ip, int(self.port)))
-        tcp_sock.listen(1)
-        try:
-
-            while True:
-                conn, addr = tcp_sock.accept()
-                print("connection address:", addr)
-
-                while True:
-                    data = conn.recv(BUFFER_SIZE)
-                    array = json.loads(data.decode())
-                    print("info from array:", array)
-                    result = Controller(array).check()
-
-                    if not data: break
-                    if result:
-                        print("result 1:", result)
-                        info = ({'result': 1})
-                        conn.send(json.dumps(info).encode('utf-8'))
-
-                    else:
-                        print("Message Received:", array)
-                        info = ({'result': 0})
-                        print("result 0:", result)
-                        conn.send(json.dumps(info).encode('utf-8'))
-
-        except:
-            print("something went wrong on module Server TCP with:", sys.exc_info()[0], sys.exc_info()[1])
-            conn.close()
-            tcp_sock.close()
-            Run(5003, '127.0.0.1').main()
-
-if __name__ == '__main__':
-    Run(5003, '127.0.0.1').main()
+main()

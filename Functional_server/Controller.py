@@ -1,40 +1,39 @@
 # import socket
 # import sys
-import Voucher
-import CPF
-import Cad_ind
-import Simp_pass
+from Test_Cases import Cad_ind, Simp_pass, CPF, Voucher
+
+
 class Controller:
 
-    def __init__(self, function=None):
-        self.function = function
+    def __init__(self, Case=None):
+        self.Case = int(Case)
 
     def check(self):
         try:
-            print(self.function["code"])
+            print(type(self.Case))
 
-            if self.function["code"] == 1:
-                print("Voucher", self.function)
-                result = Voucher.Voucher(self.function["voucher"], self.function["time"], self.function["ssid"]).test()
+            if self.Case == 1:
+                print("Voucher", self.Case)
+                result = Voucher.Voucher(self.Case["voucher"], self.Case["time"], self.Case["ssid"]).test()
                 return result
 
-            elif self.function["code"] == 2:
-                print("CPF", self.function)
-                result = CPF.CPF(self.function["cpf"], self.function["time"], self.function["ssid"]).test()
+            elif self.Case == 2:
+                print("CPF", self.Case)
+                result = CPF.CPF(self.Case["cpf"], self.Case["time"], self.Case["ssid"]).test()
                 return result
 
-            elif self.function["code"] == 3:
-                print("Cadastro Individual", self.function)
-                result = Cad_ind.Cad_ind(self.function["cpf"], self.function["time"], self.function["ssid"], self.function["telefone"], self.function["email"], self.function["nome"]).test()
+            elif self.Case == 3:
+                print("Cadastro Individual", self.Case)
+                result = Cad_ind.Cad_ind(self.Case["cpf"], self.Case["time"], self.Case["ssid"], self.Case["telefone"], self.Case["email"], self.Case["nome"]).test()
                 return result
 
-            elif self.function["code"] == 4:
-                print("Senha Simples    ", self.function)
-                result = Simp_pass.Simp_pass(self.function["password"], self.function["time"], self.function["ssid"]).test()
+            elif self.Case == 4:
+                print("Senha Simples", self.Case)
+                result = Simp_pass.Simp_pass(self.Case["password"], self.Case["time"], self.Case["ssid"]).test()
                 return result
 
             else:
-               print("Não foi", self.function)
+               print("Não foi", self.Case)
 
         except:
             print("erro occurred in:", BaseException.args())
